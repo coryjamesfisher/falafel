@@ -1,6 +1,8 @@
 <?php namespace test\Listing;
 
+use Column\ColumnBase;
 use Criteria\CriteriaBase;
+use DataSource\DataSourceArray;
 use HTTP\RequestBase;
 use HTTP\ResponseBase;
 use Listing\ListingBase;
@@ -14,7 +16,20 @@ class ListingBaseTest extends \PHPUnit_Framework_TestCase {
 	{
 		$request = new RequestBase($criteria);
 		$response = new ResponseBase();
+		$dataSource = new DataSourceArray(
+			array(
+				array('id' => 1, 'username' => 'coryjamesfisher', 'first_name' => 'Cory'  , 'last_name' => 'Fisher'),
+				array('id' => 2, 'username' => 'karathenurse'   , 'first_name' => 'Kara'  , 'last_name' => 'Fisher'),
+				array('id' => 3, 'username' => 'llizano'        , 'first_name' => 'Lucila', 'last_name' => 'Lizano')
+			)
+		);
+
 		$listing = new ListingBase();
+		$listing->setDataSource($dataSource);
+		$listing->addColumnDef('id', new ColumnBase('id'));
+		$listing->addColumnDef('username', new ColumnBase('username'));
+		$listing->addColumnDef('first_name', new ColumnBase('first_name'));
+		$listing->addColumnDef('last_name', new ColumnBase('last_name'));
 		$listing->exec($request, $response);
 
 		$this->assertInstanceOf('\Listing\ListingBase', $listing);
@@ -27,7 +42,6 @@ class ListingBaseTest extends \PHPUnit_Framework_TestCase {
 		$response_output = ob_get_clean();
 
 		$this->assertNotEmpty($response_output);
-
 	}
 
 	public function testExecDataProvider()

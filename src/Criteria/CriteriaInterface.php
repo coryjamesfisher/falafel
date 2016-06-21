@@ -9,6 +9,7 @@ interface CriteriaInterface
 	public function getLimit();
 	public function setLimit($limit);
 
+	public function getFilters();
 	public function eq($column_id, $value);
 	public function ne($column_id, $value);
 	public function gt($column_id, $value);

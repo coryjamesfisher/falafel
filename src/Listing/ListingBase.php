@@ -6,51 +6,61 @@ use Criteria\CriteriaInterface;
 use DataSource\DataSourceInterface;
 use http\RequestInterface;
 use http\ResponseInterface;
+use Renderer\RendererHTML;
 use Renderer\RendererInterface;
 
 class ListingBase implements ListingInterface
 {
 
+	protected $dataSource = null;
+	protected $renderer = null;
+	protected $columnDefs = array();
+
+	public function __construct()
+	{
+		$this->setRenderer(self::getDefaultRenderer());
+	}
+
 	/** @return Listing */
 	public function setDataSource(DataSourceInterface $dataSource)
 	{
-		// TODO: Implement setDataSource() method.
+		$this->dataSource = $dataSource;
 	}
 
 	/** @return DataSourceInterface */
 	public function getDataSource()
 	{
-		// TODO: Implement getDataSource() method.
+		return $this->dataSource;
 	}
 
 	/** @return Listing */
 	public function setRenderer(RendererInterface $renderer)
 	{
-		// TODO: Implement setRenderer() method.
+		$this->renderer = $renderer;
 	}
 
 	/** @return RendererInterface */
 	public function getRenderer()
 	{
-		// TODO: Implement getRenderer() method.
+		return $this->renderer;
 	}
 
 	/** @return Listing */
 	public function addColumnDef($column_id, ColumnInterface $column)
 	{
-		// TODO: Implement addColumnDef() method.
+		$this->columnDefs[$column_id] = $column;
 	}
 
 	/** @return Listing */
 	public function setColumnDefs($columns)
 	{
-		// TODO: Implement setColumnDefs() method.
+		$this->columnDefs = $columns;
 	}
 
 	/** @return ColumnInterface[] */
 	public function getColumnDefs()
 	{
-		// TODO: Implement getColumnDefs() method.
+		return $this->columnDefs;
 	}
 
 	/** @return ColumnInterface */
@@ -66,9 +76,11 @@ class ListingBase implements ListingInterface
 		// TODO: Implement exec() method.
 
 		// Set the response into callback to avoid holding the entire dataset in memory (for those with cursor ability)
-		$response->setBodyCallback(function() {
+		$response->setBodyCallback(function() use ($request) {
 
-			echo "sample response text";
+			$rows = $this->getDataSource()->fetchRows($request->getCriteria());
+
+			$this->getRenderer()->render($this->getColumnDefs(), $rows);
 		});
 	}
 
@@ -81,5 +93,10 @@ class ListingBase implements ListingInterface
 	public function getRowValues(CriteriaInterface $criteria, $row_number)
 	{
 		// TODO: Implement getRowValues() method.
+	}
+
+	protected static function getDefaultRenderer()
+	{
+		return new RendererHTML();
 	}
 }

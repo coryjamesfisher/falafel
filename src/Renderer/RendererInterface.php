@@ -3,4 +3,5 @@
 interface RendererInterface
 {
 
+	public function render($columnDefs, $rows);
 }

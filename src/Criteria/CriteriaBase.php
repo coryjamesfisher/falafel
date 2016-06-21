@@ -8,7 +8,7 @@ class CriteriaBase implements CriteriaInterface
 	protected $sortField;
 	protected $sortDirectionDesc;
 	protected $fields;
-	protected $criteria = array();
+	protected $filters = array();
 
 	public function getPage()
 	{
@@ -32,37 +32,42 @@ class CriteriaBase implements CriteriaInterface
 
 	public function eq($column_id, $value)
 	{
-		$this->criteria['eq'][$column_id] = is_array($value) ? $value : array($value);
+		$this->filters['eq'][$column_id] = is_array($value) ? $value : array($value);
 	}
 
 	public function ne($column_id, $value)
 	{
-		$this->criteria['ne'][$column_id] = is_array($value) ? $value : array($value);
+		$this->filters['ne'][$column_id] = is_array($value) ? $value : array($value);
 	}
 
 	public function gt($column_id, $value)
 	{
-		$this->criteria['gt'][$column_id] = is_array($value) ? $value : array($value);
+		$this->filters['gt'][$column_id] = is_array($value) ? $value : array($value);
 	}
 
 	public function lt($column_id, $value)
 	{
-		$this->criteria['lt'][$column_id] = is_array($value) ? $value : array($value);
+		$this->filters['lt'][$column_id] = is_array($value) ? $value : array($value);
 	}
 
 	public function startsWith($column_id, $value)
 	{
-		$this->criteria['startsWith'][$column_id] = is_array($value) ? $value : array($value);
+		$this->filters['startsWith'][$column_id] = is_array($value) ? $value : array($value);
 	}
 
 	public function endsWith($column_id, $value)
 	{
-		$this->criteria['endsWith'][$column_id] = is_array($value) ? $value : array($value);
+		$this->filters['endsWith'][$column_id] = is_array($value) ? $value : array($value);
 	}
 
 	public function search($column_id, $value)
 	{
-		$this->criteria['search'][$column_id] = is_array($value) ? $value : array($value);
+		$this->filters['search'][$column_id] = is_array($value) ? $value : array($value);
+	}
+
+	public function getFilters()
+	{
+		return $this->filters;
 	}
 
 	public function setFields($fields)
