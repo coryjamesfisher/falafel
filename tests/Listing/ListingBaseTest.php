@@ -27,7 +27,6 @@ class ListingBaseTest extends \PHPUnit_Framework_TestCase {
 		$response_output = ob_get_clean();
 
 		$this->assertNotEmpty($response_output);
-		echo strlen($response_output);
 
 	}
 

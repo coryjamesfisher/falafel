@@ -68,6 +68,7 @@ class ListingBase implements ListingInterface
 		// Set the response into callback to avoid holding the entire dataset in memory (for those with cursor ability)
 		$response->setBodyCallback(function() {
 
+			echo "sample response text";
 		});
 	}
 
