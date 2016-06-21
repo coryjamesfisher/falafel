@@ -1,0 +1,5 @@
+#!/bin/bash
+BASEDIR="$(dirname $0)/.."
+PHPUNIT="$BASEDIR/vendor/bin/phpunit"
+
+php $PHPUNIT --stderr --bootstrap tests/bootstrap.php $BASEDIR/tests/

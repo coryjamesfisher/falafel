@@ -1,0 +1,20 @@
+{
+    "name": "coryjamesfisher/falafel",
+    "description": "Falafel - Flexible Listing Framework",
+    "require-dev": {
+        "phpunit/phpunit": "4.8.26"
+    },
+
+    "autoload": {
+        "classmap": [
+            "src/"
+        ]
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Cory Fisher",
+            "email": "coryjamesfisher@gmail.com"
+        }
+    ]
+}
