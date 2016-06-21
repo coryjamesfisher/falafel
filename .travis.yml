@@ -2,7 +2,6 @@ language: php
 php:
   - '5.4'
 install:
+  - composer update
   - composer install
 script: ./build/phpunit
-
-
