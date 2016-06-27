@@ -1,6 +1,6 @@
-<?php namespace HTTP;
+<?php namespace Falafel\HTTP;
 
-use Criteria\CriteriaInterface;
+use Falafel\Criteria\CriteriaInterface;
 
 interface RequestInterface
 {

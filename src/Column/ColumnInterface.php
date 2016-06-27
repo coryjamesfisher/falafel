@@ -1,6 +1,6 @@
-<?php namespace Column;
+<?php namespace Falafel\Column;
 
-use Renderer\ColumnRendererInterface;
+use Falafel\Renderer\ColumnRendererInterface;
 
 interface ColumnInterface
 {

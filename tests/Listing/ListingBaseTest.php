@@ -1,11 +1,11 @@
-<?php namespace test\Listing;
+<?php namespace Falafel\test\Listing;
 
-use Column\ColumnBase;
-use Criteria\CriteriaBase;
-use DataSource\DataSourceArray;
-use HTTP\RequestBase;
-use HTTP\ResponseBase;
-use Listing\ListingBase;
+use Falafel\Column\ColumnBase;
+use Falafel\Criteria\CriteriaBase;
+use Falafel\DataSource\DataSourceArray;
+use Falafel\HTTP\RequestBase;
+use Falafel\HTTP\ResponseBase;
+use Falafel\Listing\ListingBase;
 
 class ListingBaseTest extends \PHPUnit_Framework_TestCase {
 
@@ -32,10 +32,10 @@ class ListingBaseTest extends \PHPUnit_Framework_TestCase {
 		$listing->addColumnDef('last_name', new ColumnBase('last_name'));
 		$listing->exec($request, $response);
 
-		$this->assertInstanceOf('\Listing\ListingBase', $listing);
-		$this->assertInstanceOf('\HTTP\RequestBase', $request);
-		$this->assertInstanceOf('\HTTP\ResponseBase', $response);
-		$this->assertInstanceOf('\Criteria\CriteriaBase', $request->getCriteria());
+		$this->assertInstanceOf('\Falafel\Listing\ListingBase', $listing);
+		$this->assertInstanceOf('\Falafel\HTTP\RequestBase', $request);
+		$this->assertInstanceOf('\Falafel\HTTP\ResponseBase', $response);
+		$this->assertInstanceOf('\Falafel\Criteria\CriteriaBase', $request->getCriteria());
 
 		ob_start();
 		$response->send();

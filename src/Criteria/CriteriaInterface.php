@@ -1,4 +1,4 @@
-<?php namespace Criteria;
+<?php namespace Falafel\Criteria;
 
 interface CriteriaInterface
 {

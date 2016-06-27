@@ -1,13 +1,13 @@
-<?php namespace Listing;
+<?php namespace Falafel\Listing;
 
 
-use Column\ColumnInterface;
-use Criteria\CriteriaInterface;
-use DataSource\DataSourceInterface;
-use http\RequestInterface;
-use http\ResponseInterface;
-use Renderer\RendererHTML;
-use Renderer\RendererInterface;
+use Falafel\Column\ColumnInterface;
+use Falafel\Criteria\CriteriaInterface;
+use Falafel\DataSource\DataSourceInterface;
+use Falafel\http\RequestInterface;
+use Falafel\http\ResponseInterface;
+use Falafel\Renderer\RendererHTML;
+use Falafel\Renderer\RendererInterface;
 
 class ListingBase implements ListingInterface
 {

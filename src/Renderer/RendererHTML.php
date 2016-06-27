@@ -1,4 +1,4 @@
-<?php namespace Renderer;
+<?php namespace Falafel\Renderer;
 
 class RendererHTML implements RendererInterface
 {

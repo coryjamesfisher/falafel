@@ -1,7 +1,7 @@
-<?php namespace Column;
+<?php namespace Falafel\Column;
 
-use Renderer\ColumnRendererHTML;
-use Renderer\ColumnRendererInterface;
+use Falafel\Renderer\ColumnRendererHTML;
+use Falafel\Renderer\ColumnRendererInterface;
 
 class ColumnBase implements ColumnInterface
 {

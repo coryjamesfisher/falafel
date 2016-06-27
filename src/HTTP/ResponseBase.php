@@ -1,4 +1,4 @@
-<?php namespace HTTP;
+<?php namespace Falafel\HTTP;
 
 class ResponseBase implements ResponseInterface
 {

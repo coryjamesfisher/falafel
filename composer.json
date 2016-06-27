@@ -6,9 +6,9 @@
     },
 
     "autoload": {
-        "classmap": [
-            "src/"
-        ]
+        "psr-4": {
+            "Falafel\\": "src/"
+        }
     },
     "license": "MIT",
     "authors": [

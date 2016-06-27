@@ -1,4 +1,4 @@
-<?php namespace DataSource;
+<?php namespace Falafel\DataSource;
 
 class PDOIterator implements \Iterator
 {

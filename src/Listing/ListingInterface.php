@@ -1,11 +1,11 @@
-<?php namespace Listing;
+<?php namespace Falafel\Listing;
 
-use DataSource\DataSourceInterface;
-use http\RequestInterface;
-use http\ResponseInterface;
-use Renderer\RendererInterface;
-use Column\ColumnInterface;
-use Criteria\CriteriaInterface;
+use Falafel\DataSource\DataSourceInterface;
+use Falafel\http\RequestInterface;
+use Falafel\http\ResponseInterface;
+use Falafel\Renderer\RendererInterface;
+use Falafel\Column\ColumnInterface;
+use Falafel\Criteria\CriteriaInterface;
 
 /* @note All setters should return the Listing object for chaining */
 interface ListingInterface {

@@ -1,8 +1,8 @@
-<?php namespace test\Listing;
+<?php namespace Falafel\test\Listing;
 
-use Column\ColumnBase;
-use Criteria\CriteriaBase;
-use DataSource\DataSourceMySQL;
+use Falafel\Column\ColumnBase;
+use Falafel\Criteria\CriteriaBase;
+use Falafel\DataSource\DataSourceMySQL;
 
 class DataSourceMySQLTest extends \PHPUnit_Framework_TestCase {
 
@@ -18,7 +18,7 @@ class DataSourceMySQLTest extends \PHPUnit_Framework_TestCase {
 		$ds = new DataSourceMySQL('laravel.users');
 		$rows = $ds->fetchRows($criteria);
 
-		$this->assertInstanceOf('\DataSource\PDOIterator', $rows);
+		$this->assertInstanceOf('\Falafel\DataSource\PDOIterator', $rows);
 
 		$rows->rewind();
 		$first = $rows->current();

@@ -1,6 +1,6 @@
-<?php namespace DataSource;
+<?php namespace Falafel\DataSource;
 
-use Criteria\CriteriaInterface;
+use Falafel\Criteria\CriteriaInterface;
 
 class DataSourceMySQL implements DataSourceInterface
 {
