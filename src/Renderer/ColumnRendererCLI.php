@@ -17,12 +17,12 @@ class ColumnRendererCLI implements ColumnRendererInterface
 
 	public function renderHead()
 	{
-		echo '|' . str_pad($this->column->getKey(), 10, ' ', STR_PAD_BOTH) . '|';
+		echo '|' . str_pad($this->column->getKey(), 20, ' ', STR_PAD_BOTH) . '|';
 	}
 
 	public function renderCell($row)
 	{
-		echo '|' . str_pad($row[$this->column->getKey()], 10, ' ') . '|';
+		echo '|' . str_pad($row[$this->column->getKey()], 20, ' ') . '|';
 	}
 
 	public function renderFoot()
