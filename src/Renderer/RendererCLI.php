@@ -23,7 +23,7 @@ class RendererCLI implements RendererInterface
 			$columnDef->getRenderer()->renderFoot();
 		}
 
-		echo PHP_EOL:
+		echo PHP_EOL;
 
 	}
 }
