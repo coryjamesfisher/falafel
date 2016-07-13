@@ -12,8 +12,6 @@ class DataSourceMySQLTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testFetchRows($criteria, $testName)
 	{
-		$this->markTestSkipped('Skipping Test for Travis CI Build');
-		return;
 
 		$ds = new DataSourceMySQL('laravel.users');
 		$rows = $ds->fetchRows($criteria);
@@ -76,18 +74,16 @@ class DataSourceMySQLTest extends \PHPUnit_Framework_TestCase {
 	public function testConditionToWhere()
 	{
 
-		$this->markTestSkipped('Disabled until reflection & pass by reference can be figured out');
-		return;
-
 		// Set up for testing protected method
-		$class = new \ReflectionClass('\DataSource\DataSourceMySQL');
+		$class = new \ReflectionClass('\Falafel\DataSource\DataSourceMySQL');
 		$method = $class->getMethod('conditionToWhere');
 		$method->setAccessible(true);
 		
 		$ds = new DataSourceMySQL('laravel.users');
 
 		$queryParams = array();
-		$result = $method->invokeArgs($ds, array('id', 'eq', array(1, 2), $queryParams));
+		$result = $method->invokeArgs($ds, array('id', 'eq', array(1, 2), &$queryParams));
+		$this->assertEquals('id IN(:id_0,:id_1)', trim($result));
 	}
 
 }
