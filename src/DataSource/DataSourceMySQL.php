@@ -30,12 +30,27 @@ class DataSourceMySQL implements DataSourceInterface
 
 	protected function criteriaToPDOStatement(CriteriaInterface $criteria)
 	{
+		$queryParams = array();
+		$query = $this->criteriaToQuery($criteria, $queryParams);
+		return $this->query($query, $queryParams);
+	}
 
+	protected function query($query, $queryParams)
+	{
 		$mysql = new \PDO('mysql:host=localhost;dbname=laravel;charset=utf8', 'migration', 'migrationpass');
 		$mysql->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-		$query = 'SELECT ' . implode(',', $criteria->getFields()) . ' FROM ' . $this->table;
-		$queryParams = array();
+
+		$statement = $mysql->prepare($query);
+		$statement->execute($queryParams);
+
+		return $statement;
+	}
+
+	protected function criteriaToQuery(CriteriaInterface $criteria, &$queryParams)
+	{
 		$where = '';
+
+		$query = 'SELECT ' . implode(',', $criteria->getFields()) . ' FROM ' . $this->table;
 
 		$filters = $criteria->getFilters();
 
@@ -48,11 +63,10 @@ class DataSourceMySQL implements DataSourceInterface
 		$where = substr($where, 0, -5);
 		$query .= (strlen($where) ? ' WHERE ' . $where : '');
 
-		$statement = $mysql->prepare($query);
-		$statement->execute($queryParams);
-
-		return $statement;
+		return $query;
 	}
+
+		
 
 	protected function conditionToWhere($field, $comparator, $values, &$queryParams)
 	{
