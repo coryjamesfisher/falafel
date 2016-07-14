@@ -11,8 +11,12 @@ class DataSourceMySQLTest extends \PHPUnit_Framework_TestCase {
 
 	public function setUp()
 	{
-		$this->connection = new \PDO('mysql:host=localhost;dbname=laravel;charset=utf8', 'migration', 'migrationpass');
-		$this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+		try {
+			$this->connection = new \PDO('mysql:host=localhost;dbname=laravel;charset=utf8', 'migration', 'migrationpass');
+			$this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+		} catch (\PDOException $e) {
+			$this->markTestSkipped('Skipping database test due to DB exception');
+		}
 	}
 
 	public function tearDown()
@@ -27,13 +31,7 @@ class DataSourceMySQLTest extends \PHPUnit_Framework_TestCase {
 	{
 
 		$ds = new DataSourceMySQL($this->connection, 'laravel.users');
-
-		try {
-			$rows = $ds->fetchRows($criteria);
-		} catch (\PDOException $e) {
-			$this->markTestSkipped('Skipping database test due to DB exception');
-			return;
-		}
+		$rows = $ds->fetchRows($criteria);
 
 		$this->assertInstanceOf('\Falafel\DataSource\PDOIterator', $rows);
 
