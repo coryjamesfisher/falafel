@@ -5,10 +5,12 @@ use Falafel\Criteria\CriteriaInterface;
 class DataSourceMySQL implements DataSourceInterface
 {
 
+	protected $connection;
 	protected $table;
 
-	public function __construct($table)
+	public function __construct(\PDO $connection, $table)
 	{
+		$this->connection = $connection;
 		$this->table = $table;
 	}
 
@@ -37,10 +39,8 @@ class DataSourceMySQL implements DataSourceInterface
 
 	protected function query($query, $queryParams)
 	{
-		$mysql = new \PDO('mysql:host=localhost;dbname=laravel;charset=utf8', 'migration', 'migrationpass');
-		$mysql->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
-		$statement = $mysql->prepare($query);
+		$statement = $this->connection->prepare($query);
 		$statement->execute($queryParams);
 
 		return $statement;

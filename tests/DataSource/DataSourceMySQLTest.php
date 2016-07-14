@@ -7,13 +7,26 @@ use Falafel\DataSource\DataSourceMySQL;
 class DataSourceMySQLTest extends \PHPUnit_Framework_TestCase {
 
 
+	protected $connection;
+
+	public function setUp()
+	{
+		$this->connection = new \PDO('mysql:host=localhost;dbname=laravel;charset=utf8', 'migration', 'migrationpass');
+		$this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+	}
+
+	public function tearDown()
+	{
+		unset($this->connection);
+	}
+
 	/**
 	 * @dataProvider testFetchRowsDataProvider
 	 */
 	public function testFetchRows($criteria, $testName)
 	{
 
-		$ds = new DataSourceMySQL('laravel.users');
+		$ds = new DataSourceMySQL($this->connection, 'laravel.users');
 
 		try {
 			$rows = $ds->fetchRows($criteria);
@@ -85,7 +98,7 @@ class DataSourceMySQLTest extends \PHPUnit_Framework_TestCase {
 		$method = $class->getMethod('conditionToWhere');
 		$method->setAccessible(true);
 		
-		$ds = new DataSourceMySQL('laravel.users');
+		$ds = new DataSourceMySQL($this->connection, 'laravel.users');
 
 		$queryParams = array();
 		$result = $method->invokeArgs($ds, array('id', 'eq', array(1, 2), &$queryParams));
