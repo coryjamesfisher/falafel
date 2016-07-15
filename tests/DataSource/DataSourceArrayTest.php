@@ -19,8 +19,8 @@ class DataSourceArrayTest extends \PHPUnit_Framework_TestCase {
 					'id' => 1,
 					'name' => 'Cory Fisher',
 					'email' => 'coryjamesfisher@gmail.com',
-					'created_at' => mktime(),
-					'updated_at' => mktime()
+					'created_at' => time(),
+					'updated_at' => time()
 				)
 			)
 		);
@@ -50,8 +50,8 @@ class DataSourceArrayTest extends \PHPUnit_Framework_TestCase {
 					'id' => 1,
 					'name' => 'Cory Fisher',
 					'email' => 'coryjamesfisher@gmail.com',
-					'created_at' => mktime(),
-					'updated_at' => mktime()
+					'created_at' => time(),
+					'updated_at' => time()
 				)
 			)
 		);
