@@ -60,8 +60,10 @@ class DataSourceMySQL implements DataSourceInterface
 			}
 		}
 
-		$where = substr($where, 0, -5);
-		$query .= (strlen($where) ? ' WHERE ' . $where : '');
+		if (!empty($where)) {
+			$where = substr($where, 0, -5);
+			$query .= (strlen($where) ? ' WHERE ' . $where : '');
+		}
 
 		return $query;
 	}
@@ -78,7 +80,7 @@ class DataSourceMySQL implements DataSourceInterface
 
 				$where .= '(';
 				foreach ($values as $value) {
-					$where .= $this->conditionToWhere($field, $comparator, $value, $queryParams) . ' OR ';
+					$where .= $this->conditionToWhere($field, $comparator, array($value), $queryParams) . ' OR ';
 				}
 				
 				// Trim trailing OR statement

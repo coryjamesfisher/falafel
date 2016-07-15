@@ -2,4 +2,4 @@
 BASEDIR="$(dirname $0)/.."
 PHPUNIT="$BASEDIR/vendor/bin/phpunit"
 
-php $PHPUNIT --stderr --bootstrap tests/bootstrap.php $BASEDIR/tests/
+php $PHPUNIT --stderr --coverage-html=".coverage" --bootstrap tests/bootstrap.php $BASEDIR/tests/

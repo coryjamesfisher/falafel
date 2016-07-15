@@ -76,6 +76,10 @@ class DataSourceMySQLTest extends \PHPUnit_Framework_TestCase {
 		$crit6->setSort('id', false);
 		$crit6->search('name', array('ory Fis'));
 
+		$crit7 = new CriteriaBase();
+		$crit7->setFields(array('id', 'name', 'email', 'created_at', 'updated_at'));
+		$crit7->setSort('id', false);
+		$crit7->startsWith('name', array('Co', 'Cor'));
 
 		return [
 			[ $crit1, 'Equals Test' ],
@@ -84,9 +88,9 @@ class DataSourceMySQLTest extends \PHPUnit_Framework_TestCase {
 			[ $crit4, 'Starts With Test' ],
 			[ $crit5, 'Ends With Test' ],
 			[ $crit6, 'Search Test' ],
+			[ $crit7, 'OR Test'],
 		];
 	}
-
 
 	public function testConditionToWhere()
 	{
@@ -101,6 +105,19 @@ class DataSourceMySQLTest extends \PHPUnit_Framework_TestCase {
 		$queryParams = array();
 		$result = $method->invokeArgs($ds, array('id', 'eq', array(1, 2), &$queryParams));
 		$this->assertEquals('id IN(:id_0,:id_1)', trim($result));
+	}
+
+	public function testConditionToWhereInvalidComparator()
+	{
+		$this->setExpectedException('\InvalidArgumentException');
+		$class = new \ReflectionClass('\Falafel\DataSource\DataSourceMySQL');
+		$method = $class->getMethod('conditionToWhere');
+		$method->setAccessible(true);
+		
+		$ds = new DataSourceMySQL($this->connection, 'laravel.users');
+
+		$queryParams = array();
+		$result = $method->invokeArgs($ds, array('id', 'invalidComparator', array(1, 2), &$queryParams));
 	}
 
 }
