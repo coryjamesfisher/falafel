@@ -15,8 +15,9 @@ class DataSourceArray implements DataSourceInterface
 	public function fetchRows(CriteriaInterface $criteria)
 	{
 
-		$matches = array();
+		$matches = new \ArrayIterator();
 		$filters = $criteria->getFilters();
+
 		foreach ($this->rows as $row) {
 
 
@@ -128,6 +129,8 @@ class DataSourceArray implements DataSourceInterface
 			}
 
 			if (array_key_exists('search', $filters)) {
+
+				$matched = false;
 				foreach ($filters['search'] as $filter_column => $filter_values) {
 
 					foreach ($filter_values as $filter_value) {
@@ -143,7 +146,7 @@ class DataSourceArray implements DataSourceInterface
 				}
 			}
 
-			$matches[] = $row;
+			$matches->append($row);
 
 		}
 

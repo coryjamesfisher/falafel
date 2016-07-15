@@ -77,7 +77,8 @@ class DataSourceMySQLTest extends \PHPUnit_Framework_TestCase {
 		$crit6->search('name', array('ory Fis'));
 
 		$crit7 = new CriteriaBase();
-		$crit7->setFields(array('id', 'name', 'email', 'created_at', 'updated_at'));
+		$crit7->setFields(array('id', 'name', 'email', 'created_at'));
+		$crit7->addField('updated_at');
 		$crit7->setSort('id', false);
 		$crit7->startsWith('name', array('Co', 'Cor'));
 
