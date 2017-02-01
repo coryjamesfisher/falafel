@@ -10,5 +10,5 @@ node {
    sh "composer install"
    
    stage 'Build'
-   sh "./vendor/bin/phpunit --log-junit 'reports/unitreport.xml' --coverage-html 'reports/coverage' --coverage-clover 'reports/coverage/coverage.xml' tests/"
+   sh "./vendor/bin/phpunit --stderr --log-junit 'reports/unitreport.xml' --coverage-html 'reports/coverage' --coverage-clover 'reports/coverage/coverage.xml' tests/"
 }
