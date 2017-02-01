@@ -6,6 +6,9 @@ node {
    checkout scm
 
    // Mark the code build 'stage'....
+   stage 'Dependencies'
+   sh "composer install"
+   
    stage 'Build'
    sh "phpunit --log-junit 'reports/unitreport.xml' --coverage-html 'reports/coverage' --coverage-clover 'reports/coverage/coverage.xml' test/"
 }
